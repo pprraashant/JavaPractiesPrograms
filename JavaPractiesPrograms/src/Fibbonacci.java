@@ -5,7 +5,7 @@ import java.util.Map;
 class Fibbonacci
 {
 	int number;
-	Map<Integer, Integer> memo= new HashMap<Integer,Integer>();
+	Map<Long, Long> memo= new HashMap<Long,Long>();
 	Fibbonacci(int no)
 	{
 		this.number=no;
@@ -29,17 +29,22 @@ class Fibbonacci
 		System.out.println(this.number);
 	}
 	//Recursive method of fibbonacci Series
-	int fibbonacciseries(int n) throws Exception
+	Long fibbonacciseries(long i) throws Exception
 	{
-		if(n<0)
+		if(i<0)
 		{
 			throw new IllegalArgumentException();
 		}
-		if(n==0||n==1)
+		if(i==0||i==1)
 		{
-			return n;
+			return i;
 		}
-		int result=fibbonacciseries(n-1)+fibbonacciseries(n-2);
+		if(memo.containsKey(i))
+		{
+			return memo.get(i);
+		}
+		Long result=fibbonacciseries(i-1)+fibbonacciseries(i-2);
+		memo.put(i, result);
 		return result;
 	}
 	
@@ -58,7 +63,9 @@ class Fibbonacci
 //			f2=f2.Fibbonacci_equal(f3);
 		}
 		try {
-			System.out.println(f3.fibbonacciseries(9));
+			System.out.println(f3.fibbonacciseries(10));
+			//1556111435-1000									   
+			//Integer range in java -2,147,483,648 to 2147483647)
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
